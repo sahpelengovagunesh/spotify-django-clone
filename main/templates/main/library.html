@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>Kitabxananız – Spotify</title>
+    <style>
+        body { background-color: #121212; color: #fff; font-family: sans-serif; padding: 20px; }
+        .song-item { display: flex; justify-content: space-between; padding: 12px; background: #181818; margin-bottom: 8px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'home' %}" style="color: #b3b3b3;">← Ana Səhifə</a>
+    <h1 style="margin-top: 15px;">Bəyəndiyiniz Mahnılar</h1>
+    
+    <div style="margin-top: 20px;">
+        {% for item in liked_songs %}
+            <div class="song-item">
+                <span><strong>{{ item.song.title }}</strong> - {{ item.song.album.artist }}</span>
+                <a href="{% url 'toggle_like' item.song.id %}" style="color: red; text-decoration: none;">Sil</a>
+            </div>
+        {% empty %}
+            <p>Hələ heç bir mahnını bəyənməmisiniz.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>

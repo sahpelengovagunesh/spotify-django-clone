@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ album.title }} – Spotify</title>
+    <style>
+        body { background-color: #121212; color: #fff; font-family: sans-serif; padding: 20px; }
+        .song-list { margin-top: 20px; }
+        .song-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #282828; }
+        .like-btn { color: #1db954; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <a href="{% url 'home' %}" style="color: #b3b3b3;">← Geriyə</a>
+    <h1>{{ album.title }}</h1>
+    <h3>İfaçı: {{ album.artist }}</h3>
+
+    <div class="song-list">
+        <h2>Mahnılar</h2>
+        {% for song in songs %}
+            <div class="song-item">
+                <span>{{ song.title }} ({{ song.duration }})</span>
+                <a href="{% url 'toggle_like' song.id %}" class="like-btn">♥ Yadda saxla</a>
+            </div>
+        {% empty %}
+            <p>Bu albomda hələ mahnı yoxdur.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
